@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping - Login</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container{
+            background: white;
+            width: 350px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+        }
+        h2{
+            text-align: center;
+        }
+        input{
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        button{
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .register-link{
+            text-align: center;
+            margin-top: 15px;
+        }
+        .register-link a{
+            cursor: pointer;
+            color: blue;
+        }
+        .message{
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        #registration{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- LOGIN PAGE -->
+    <div id="login">
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email ID">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <div class="register-link">
+            New User?
+            <a onclick="showRegistration()">New Registration</a>
+        </div>
+        <div id="loginMessage" class="message"></div>
+    </div>
+    <!-- REGISTRATION PAGE -->
+    <div id="registration">
+        <h2>New Registration</h2>
+        <input type="email" id="regEmail" placeholder="Email ID">
+        <input type="password" id="regPassword" placeholder="Password">
+        <input type="date" id="dob">
+        <input type="tel" id="contact" placeholder="Contact No">
+        <button onclick="register()">Register</button>
+        <div id="regMessage" class="message"></div>
+    </div>
+</div>
+<script>
+    function showRegistration(){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("registration").style.display = "block";
+    }
+    function register(){
+        let email = document.getElementById("regEmail").value;
+        let password = document.getElementById("regPassword").value;
+        let dob = document.getElementById("dob").value;
+        let contact = document.getElementById("contact").value;
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let contactPattern = /^[0-9]{10}$/;
+        if(
+            emailPattern.test(email) &&
+            password.length >= 6 &&
+            dob !== "" &&
+            contactPattern.test(contact)
+        ){
+            document.getElementById("regMessage").innerHTML =
+                "Registration Successful!";
+            document.getElementById("regMessage").style.color = "green";
+
+        } else{
+            document.getElementById("regMessage").innerHTML =
+                "Invalid Details!";
+            document.getElementById("regMessage").style.color = "red";
+        }
+    }
+    function login() {
+        let email=document.getElementById("loginEmail").value;
+        let password=document.getElementById("loginPassword").value;
+        if (email === "" || password === "") {
+            document.getElementById("loginMessage").innerHTML =
+                "Invalid Email or Password!";
+            document.getElementById("loginMessage").style.color = "red";
+        }else{
+            document.getElementById("loginMessage").innerHTML =
+                "Login Successful!";
+            document.getElementById("loginMessage").style.color = "green";
+        }
+    }
+</script>
+</body>
+</html>
